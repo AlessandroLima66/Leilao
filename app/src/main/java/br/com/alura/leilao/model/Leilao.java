@@ -9,8 +9,8 @@ public class Leilao implements Serializable {
 
     private final String descricao;
     private final List<Lance> lances;
-    private double maiorLance = Double.NEGATIVE_INFINITY;
-    private double menorLance = Double.POSITIVE_INFINITY;
+    private double maiorLance = 0.0;
+    private double menorLance = 0.0;
 
     public Leilao(String descricao) {
         this.descricao = descricao;
@@ -22,10 +22,39 @@ public class Leilao implements Serializable {
     }
 
     public void propoem(Lance lance) {
-        lances.add(lance);
-        Collections.sort(lances);
         double valorLance = lance.getValor();
+        if (maiorLance > valorLance) {
+            return;
+        }
 
+        Usuario usuarioNovo = lance.getUsuario();
+        if (!lances.isEmpty()) {
+            Usuario ultimoUsuario = lances.get(0).getUsuario();
+
+            if (usuarioNovo.equals(ultimoUsuario)) {
+                return;
+            }
+        }
+
+        int lancesDoUsuario = 0;
+        for (Lance l : lances) {
+            Usuario usuarioExistente = l.getUsuario();
+            if (usuarioExistente.equals(usuarioNovo)){
+                lancesDoUsuario++;
+                if (lancesDoUsuario == 5){
+                    return;
+                }
+            }
+        }
+
+        lances.add(lance);
+        if (lances.size() == 1) {
+            maiorLance = lance.getValor();
+            menorLance = lance.getValor();
+            return;
+        }
+
+        Collections.sort(lances);
         calculaMaiorLance(valorLance);
         calculaMenorLance(valorLance);
     }
@@ -50,16 +79,16 @@ public class Leilao implements Serializable {
         return menorLance;
     }
 
-    public void setMenorLance(double menorLance) {
-        this.menorLance = menorLance;
-    }
-
     public List<Lance> tresMaioresLances() {
         int quantidadeDeLances = lances.size();
 
-        if (quantidadeDeLances > 3){
+        if (quantidadeDeLances > 3) {
             return lances.subList(0, 3);
         }
         return lances.subList(0, quantidadeDeLances);
+    }
+
+    public int quatidadeLances() {
+        return lances.size();
     }
 }
