@@ -12,6 +12,7 @@ import java.util.List;
 
 import br.com.alura.leilao.R;
 import br.com.alura.leilao.model.Leilao;
+import br.com.alura.leilao.util.FormataMoedaUtil;
 
 public class ListaLeilaoAdapter extends RecyclerView.Adapter<ListaLeilaoAdapter.ViewHolder> {
 
@@ -68,7 +69,7 @@ public class ListaLeilaoAdapter extends RecyclerView.Adapter<ListaLeilaoAdapter.
         void vincula(Leilao leilao) {
             this.leilao = leilao;
             descricao.setText(leilao.getDescricao());
-            maiorLance.setText(String.valueOf(leilao.getMaiorLance()));
+            maiorLance.setText(FormataMoedaUtil.formataParaReais(leilao.getMaiorLance()));
         }
 
     }

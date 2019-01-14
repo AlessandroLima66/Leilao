@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.alura.leilao.R;
 import br.com.alura.leilao.model.Lance;
 import br.com.alura.leilao.model.Leilao;
+import br.com.alura.leilao.util.FormataMoedaUtil;
 
 public class LancesLeilaoActivity extends AppCompatActivity {
 
@@ -27,17 +28,17 @@ public class LancesLeilaoActivity extends AppCompatActivity {
             descricao.setText(leilao.getDescricao());
 
             TextView maiorLance = findViewById(R.id.lances_leilao_maior_lance);
-            maiorLance.setText(String.valueOf(leilao.getMaiorLance()));
+            maiorLance.setText(FormataMoedaUtil.formataParaReais(leilao.getMaiorLance()));
 
             TextView menorLance = findViewById(R.id.lances_leilao_menor_lance);
-            menorLance.setText(String.valueOf(leilao.getMenorLance()));
+            menorLance.setText((FormataMoedaUtil.formataParaReais(leilao.getMenorLance())));
 
             TextView maioresLances = findViewById(R.id.lances_leilao_maiores_lances);
             List<Lance> lances = leilao.tresMaioresLances();
             StringBuilder sb = new StringBuilder();
             for (Lance l :
                     lances) {
-                sb.append(l.getValor() + "\n");
+                sb.append(FormataMoedaUtil.formataParaReais(l.getValor()) + "\n");
             }
             maioresLances.setText(sb.toString());
         }

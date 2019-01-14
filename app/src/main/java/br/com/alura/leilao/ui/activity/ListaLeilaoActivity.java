@@ -37,13 +37,11 @@ public class ListaLeilaoActivity extends AppCompatActivity {
     private List<Leilao> leiloesDeExemplo() {
         Leilao console = new Leilao("Console");
 
-        console.propoem(new Lance(new Usuario("Alessandro"),300.00));
+        console.propoem(new Lance(new Usuario("Alessandro"),100.00));
         console.propoem(new Lance(new Usuario("Carolina"),200.00));
-        console.propoem(new Lance(new Usuario("Carolina"),400.00));
-        console.propoem(new Lance(new Usuario("Carolina"),500.00));
-        console.propoem(new Lance(new Usuario("Carolina"),450.00));
-        console.propoem(new Lance(new Usuario("Carolina"),600.00));
-        console.propoem(new Lance(new Usuario("Carolina"),100.00));
+        console.propoem(new Lance(new Usuario("Ana"),300.00));
+        console.propoem(new Lance(new Usuario("Alexandre"),400.00));
+
         return new ArrayList<>(Arrays.asList(
                 console
         ));
